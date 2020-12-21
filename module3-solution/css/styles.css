@@ -1,0 +1,66 @@
+body {
+	font-size: 16px;
+	color: #fff;
+	background-color: #61122f;
+	font-family: 'Oxygen', sans-serif;
+}
+
+/** HEADER **/
+#header-nav {
+	background-color: #f6b319;
+	border-radius: 0;
+	border: 0;
+}
+
+.navbar-brand {
+	padding-top: -25px;
+}
+
+.navbar-brand h1 { /* Business Name */
+	font-family: 'Lora', serif;
+	color: #557c3e;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px #222;
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: .75;
+}
+
+.navbar-brand a:hover, .navbar-brand a:focus {
+	text-decoration: none;
+}
+
+.category-tile {
+	position: relative;
+	background: #00aaaa;
+	height: 1000px;
+	overflow: hidden;
+	margin: 0 auto 15px;
+}
+
+.category-tile span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+  opacity: .8;
+}
+
+.category-tile > div {
+	padding-top: 30px;
+	text-decoration: none;
+	font-family: 'Lora', serif;
+	color: #fff;
+}
+
+#nav-list a {
+  color: #951C49;
+  text-align: center;
+}
