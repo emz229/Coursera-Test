@@ -78,6 +78,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
 // so it can be called when server responds with the categories data.
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//            ORIGINAL CODE BELOW HERE
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+          // // On first load, show home view
+          // showLoading("#main-content");
+          // $ajaxUtils.sendGetRequest(
+          //   homeHtml,
+          //   function (responseText) {
+          //     document.querySelector("#main-content")
+          //       .innerHTML = responseText;
+          //   },
+          //   false);
+          // });
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // *** start ***
 // On first load, show home view
 showLoading("#main-content");
@@ -97,6 +112,11 @@ function buildAndShowHomeHTML (categories) {
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
+    
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++
+    //    FOLLOWING LINE IS A TEST OF LOADING MAIN CONTENT
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++
+    //document.querySelector("#main-content").innerHTML = homeHtml;
 
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
@@ -104,8 +124,6 @@ function buildAndShowHomeHTML (categories) {
       // var chosenCategoryShortName = ....
 
       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
-      var string = "'" + chosenCategoryShortName + "'";
-      chosenCategoryShortName = string;
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
       // chosen category from STEP 2. Use existing insertProperty function for that purpose.
@@ -120,51 +138,69 @@ function buildAndShowHomeHTML (categories) {
       //
       // var homeHtmlToInsertIntoMainPage = ....
 
-        // Load title snippet of categories page
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //    INSERT PROPERTY FUNCTION BELOW
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+            // // Return substitute of '{{propName}}'
+            // // with propValue in given 'string'
+            // var insertProperty = function (string, propName, propValue) {
+            //   var propToReplace = "{{" + propName + "}}";
+            //   string = string
+            //     .replace(new RegExp(propToReplace, "g"), propValue);
+            //   return string;
+            // };
 
-var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", chosenCategoryShortName);
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //    INSERT PROPERTY FUNCTION USEAGE SYNTAX
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      // insertProperty(html, "name", name);
+      // (originalHtml, searchQuery, replaceWith);
+      var chosenCategoryShortName_Formatted = "'" + chosenCategoryShortName + "'";
+
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName_Formatted);
+
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
       // ....
 
-      var homeViewHtml = buildHomeViewHtml(categories, "" ,homeHtml);
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //            ORIGINAL CODE BELOW HERE
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                // // On first load, show home view
+                // showLoading("#main-content");
+                // $ajaxUtils.sendGetRequest(
+                //   homeHtml,
+                //   function (responseText) {
+                //     document.querySelector("#main-content")
+                //       .innerHTML = responseText;
+                //   },
+                //   false);
+                // });
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-      insertHtml("#main-content", homeViewHtml);
+
+
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //    INSERT HTML FUNCTION
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      // Convenience function for inserting innerHTML for 'select'
+            // var insertHtml = function (selector, html) {
+            //   var targetElem = document.querySelector(selector);
+            //   targetElem.innerHTML = html;
+            // };
+
+
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //    INSERT HTML FUNCTION USEAGE SYNTAX
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++
+          //insertHtml("#main-content", categoriesViewHtml);
+
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
-}
-
-
-// Using categories data and snippets html
-// build categories view HTML to be inserted into page
-function buildHomeViewHtml(categories,
-                                 categoriesTitleHtml,
-                                 homeHtml) {
-
-  var finalHtml = categoriesTitleHtml;
-  finalHtml += "<section class='row'>";
-
-  // Loop over categories
-  for (var i = 0; i < categories.length; i++) {
-    // Insert category values
-    var html = homeHtmlUrl;
-    var name = "" + categories[i].name;
-    console.log("name: " + name);
-    var short_name = categories[i].short_name;
-    html =
-      insertProperty(html, "name", name);
-    html =
-      insertProperty(html,
-                     "short_name",
-                     short_name);
-    finalHtml += html;
-  }
-
-  finalHtml += "</section>";
-  return finalHtml;
 }
 
 
